@@ -1,0 +1,28 @@
+﻿<!-- TiendaWebAndrade.Views.Producto.EditModel -->
+@model TiendaWebAndrade.Models.Producto
+
+<h2>Editar Producto</h2>
+
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div type="form-group">
+        <label>Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Precio</label>
+        <input asp-for="Precio" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Stock</label>
+        <input asp-for="Stock" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Categoría</label>
+        <input asp-for="Categoria" class="form-control" />
+    </div>
+    <hr />
+    <button class="btn btn-primary">Actualizar</button>
+
+</form>

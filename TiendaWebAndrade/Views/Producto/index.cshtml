@@ -1,0 +1,36 @@
+﻿@model List<TiendaWebAndrade.Models.Producto> 
+<h2>Lista de Productos</h2>
+
+<a class="btn btn-primary" href="/Producto/Create">Nuevo Producto</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Categoria</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbdoy>
+        <!-- Busca los item he hemos creado en la List(Producto) -->
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Nombre</td>
+                <td>@item.Precio</td>
+                <td>@item.Stock</td>
+                <td>@item.Categoria?.Nombre</td>
+                <td>
+                    <a class="btn btn-warning" href="/Producto/Edit/@item.Id">Editar</a>
+                    <a class="btn btn-danger" href="/Producto/Delete/@item.Id">Eliminar</a>
+                </td>
+
+            </tr>
+        }
+    </tbdoy>
+</table>
