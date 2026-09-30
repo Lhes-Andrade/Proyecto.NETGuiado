@@ -1,19 +1,81 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TiendaWebAndrade.Data;
 using TiendaWebAndrade.Models;
+
 namespace TiendaWebAndrade.Controllers
 {
     public class UsuarioController : Controller
     {
+        private readonly TiendaContext _context;
+
+        public UsuarioController(TiendaContext context)
+        {
+            _context = context;
+        }
+
+        // LISTAR/TRAER LOS USUARIOS QUE TENGO EN LA BD (READ)
         public IActionResult Index()
         {
-            var usuarios = new List<Usuario>
-            {
-                new Usuario {Id = 1, Nombre = "Raquel", Correo = "r@gmail.com", Rol = "Estudiante", Celular = "3001485531", Estado = "A"},
-                new Usuario {Id = 2, Nombre = "Juan", Correo = "j@gmail.com", Rol = "Profesor", Celular = "3024285531", Estado = "I"},
-                new Usuario {Id = 3, Nombre = "Rodrigo", Correo = "rdg@gmail.com", Rol = "Administrativo", Celular = "3001485531", Estado = "A"},
-
-            };
+            var usuarios = _context.Usuarios.ToList();
             return View(usuarios);
+            // SELECT * FROM Usuarios
+        }
+
+        // MOSTRAR EL FORMULARIO PARA CREAR UN NUEVO USUARIO
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // GUARDAR EL NUEVO USUARIO EN LA BD
+        [HttpPost]
+        public IActionResult Create(Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Usuarios.Add(usuario);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(usuario);
+        }
+
+        // MOSTRAR EL FORMULARIO PARA EDITAR UN USUARIO ESPECIFICO
+        public IActionResult Edit(int id)
+        {
+            var usuario = _context.Usuarios.Find(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return View(usuario);
+        }
+
+        // ACTUALIZAR EL USUARIO EN LA BD
+        [HttpPost]
+        public IActionResult Edit(Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Usuarios.Update(usuario);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(usuario);
+        }
+
+        // ELIMINAR UN USUARIO EN LA BD
+        public IActionResult Delete(int id)
+        {
+            var usuario = _context.Usuarios.Find(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            _context.Usuarios.Remove(usuario);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
+
 }

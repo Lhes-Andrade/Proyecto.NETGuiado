@@ -10,8 +10,7 @@ namespace TiendaWebAndrade.Models
         public string Correo { get; set; }
         public string Rol { get; set; }
 
-        [RegularExpression(@"^3\d{9}$", ErrorMessage = "Solo se permiten números")]
+        [RegularExpression(@"^3\d{9}$", ErrorMessage = "El celular debe tener 10 dígitos y empezar por 3")]
         public string Celular { get; set; }
-        public string Estado { get; set; }
     }
 }

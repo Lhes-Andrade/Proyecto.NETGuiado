@@ -1,6 +1,7 @@
 ﻿@model List<TiendaWebAndrade.Models.Usuario>
 
 <h2>Lista de Usuarios</h2>
+<a class="btn btn-primary" href="/Usuario/Create">Nuevo Usuario</a>
 
 <table class="table">
     <thead>
@@ -9,7 +10,7 @@
             <th>Correo</th>
             <th>Rol</th>
             <th>Celular</th>
-            <th>Estado</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -21,14 +22,9 @@
                 <td>@item.Rol</td>
                 <td>@item.Celular</td>
                 <td>
-                    @if (item.Estado == "A")
-                    {
-                        <span class="text-success">Activa</span>
-                    }
-                    else
-                    {
-                        <span class="text-danger">Inactivo</span>
-                    }
+                    <a class="btn btn-warning" href="/Usuario/Edit/@item.Id">Editar</a>
+                    <a class="btn btn-danger" href="/Usuario/Delete/@item.Id"
+                       onclick="return confirm('¿Seguro que deseas eliminar a @item.Nombre?');">Eliminar</a>
                 </td>
             </tr>
         }
