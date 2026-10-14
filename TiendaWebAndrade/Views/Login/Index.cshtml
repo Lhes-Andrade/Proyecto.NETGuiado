@@ -1,0 +1,18 @@
+﻿<h2>Login</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Correo:</label>
+        <input name="correo" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label>Clave:</label>
+        <input type="password" class="form-control" name="clave">
+    </div>
+    <button class="btn btn-primary">Iniciar Sesión</button>
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3">
+            @ViewBag.Error
+        </div>
+    }
+</form>

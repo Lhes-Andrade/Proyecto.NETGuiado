@@ -2,6 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using TiendaWebAndrade.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Habilitar Session
+builder.Services.AddSession();
+
 builder.Services.AddDbContext<TiendaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // Add services to the container.
@@ -17,6 +21,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+//Activa el uso de Session en cada petición http. Cada que el servidor reciba una petición viene a buscar esta línea
+app.UseSession();
+
 app.UseHttpsRedirection();
 app.UseRouting();
 
@@ -26,7 +33,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Login}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

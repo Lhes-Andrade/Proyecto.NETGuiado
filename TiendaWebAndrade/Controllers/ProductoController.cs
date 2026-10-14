@@ -17,6 +17,11 @@ namespace TiendaWebAndrade.Controllers
         // LISTAR/TRAER LOS PRODUCTOS QUE TENGO EN LA BD (READ-LEER/CONSULTAR)
         public IActionResult Index()
         {
+            //Si el usuario es vacío, dejelo en index.login. Este if va en todas las rutas que queramos proteger
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var productos = _context.Productos
                 .Include(p => p.Categoria)
                 .ToList();
@@ -28,6 +33,13 @@ namespace TiendaWebAndrade.Controllers
         // MOSTRAR EL FORMULARIO PARA CREAR UN NUEVO PRODUCTO
         public IActionResult Create()
         {
+            //Si el usuario es vacío, dejelo en index.login. Este if va en todas las rutas que queramos proteger
+            if(HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            // ViewBag retorna categorías a la vista sin necesidad de pasarlo como parámetro
+            ViewBag.Categorias = _context.Categorias.ToList();
             return View();
         }
 
@@ -47,6 +59,11 @@ namespace TiendaWebAndrade.Controllers
         // MOSTRAR EL FORMULARIO PARA EDITAR UN PRODUCTO ESPECIFICO
         public IActionResult Edit(int id)
         {
+            //Si el usuario es vacío, dejelo en index.login. Este if va en todas las rutas que queramos proteger
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var producto = _context.Productos.Find(id);
             return View(producto);
         }
@@ -68,6 +85,11 @@ namespace TiendaWebAndrade.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+            //Si el usuario es vacío, dejelo en index.login. Este if va en todas las rutas que queramos proteger
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var producto = _context.Productos.Find(id);
             _context.Productos.Remove(producto);
             _context.SaveChanges();

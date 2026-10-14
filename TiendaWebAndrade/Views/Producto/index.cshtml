@@ -1,17 +1,17 @@
 ﻿@model List<TiendaWebAndrade.Models.Producto> 
-<h2>Lista de Productos</h2>
+<h2 class="mb-4">Lista de Productos</h2>
 
-<a class="btn btn-primary" href="/Producto/Create">Nuevo Producto</a>
-
-<table class="table">
-    <thead>
+<a class="btn btn-success mb-3" href="/Producto/Create">+ Nuevo Producto</a>
+<div class="table-reponsive">
+<table class="table table-striped table-hover table-bordered align-middlde">
+    <thead class="table-dark">
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Categoria</th>
-            <th>Acciones</th>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Categoria</th>
+            <th scope="col" class="text-center text-nowrap">Acciones</th>
         </tr>
     </thead>
 
@@ -34,3 +34,4 @@
         }
     </tbdoy>
 </table>
+</div>

@@ -1,23 +1,31 @@
 ﻿@model TiendaWebAndrade.Models.Producto
-
+<div class="container mt-4">
 <h2>Crear Producto</h2>
 <form asp-action="Create" method="post">
-    <div class="form-group">
+    <div class="mb-3">
         <label>Nombre</label>
         <input asp-for="Nombre" class="form-control" />
     </div>
-    <div class="form-group">
+    <div class="mb-3">
         <label>Precio</label>
         <input asp-for="Precio" class="form-control" />
     </div>
-    <div class="form-group">
+    <div class="mb-3">
         <label>Stock</label>
         <input asp-for="Stock" class="form-control" />
     </div>
-    <div class="form-group">
+    <div class="mb-3">
         <label>Categoría</label>
-        <input asp-for="CategoriaId" class="form-control" />
+        <select asp-for="CategoriaId" class="form-control">
+            <option value="">Seleccione una categoría</option>
+                @foreach (var cat in ViewBag.Categorias)
+                 {           
+                     <option value="@cat.Id">@cat.Nombre</option>
+                 }
+        </select>    
     </div>
     <hr />
     <button class="btn btn-success">Guardar</button>
+    <a href="/Producto" class="btn btn-secondary">Volver</a>
 </form>
+</div>
