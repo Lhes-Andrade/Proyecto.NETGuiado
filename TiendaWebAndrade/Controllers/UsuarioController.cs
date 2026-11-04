@@ -17,6 +17,11 @@ namespace TiendaWebAndrade.Controllers
         public IActionResult Index()
         {
             var usuarios = _context.Usuarios.ToList();
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             return View(usuarios);
             // SELECT * FROM Usuarios
         }
@@ -24,6 +29,10 @@ namespace TiendaWebAndrade.Controllers
         // MOSTRAR EL FORMULARIO PARA CREAR UN NUEVO USUARIO
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
@@ -31,6 +40,10 @@ namespace TiendaWebAndrade.Controllers
         [HttpPost]
         public IActionResult Create(Usuario usuario)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (ModelState.IsValid)
             {
                 _context.Usuarios.Add(usuario);
@@ -49,6 +62,11 @@ namespace TiendaWebAndrade.Controllers
                 return NotFound();
             }
             return View(usuario);
+
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         // ACTUALIZAR EL USUARIO EN LA BD
@@ -62,6 +80,10 @@ namespace TiendaWebAndrade.Controllers
                 return RedirectToAction("Index");
             }
             return View(usuario);
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         // ELIMINAR UN USUARIO EN LA BD
@@ -75,6 +97,10 @@ namespace TiendaWebAndrade.Controllers
             _context.Usuarios.Remove(usuario);
             _context.SaveChanges();
             return RedirectToAction("Index");
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
     }
 
