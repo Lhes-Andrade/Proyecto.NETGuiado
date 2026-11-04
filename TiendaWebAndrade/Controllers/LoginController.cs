@@ -27,10 +27,11 @@ namespace TiendaWebAndrade.Controllers
                 HttpContext.Session.SetString("Usuario", usuario.Nombre);
                 // En la misma variable Session estoy guardando el rol
                 HttpContext.Session.SetString("Rol", usuario.Rol);
-                    //A donde irá cuando se loguea, aquí se indica
-                    return RedirectToAction("Index", "Producto");
-                }
-                ViewBag.Error = "Credenciales incorrectas";
+                //A donde irá cuando se loguea, aquí se indica
+                //return RedirectToAction("Index", "Producto");
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.Error = "Credenciales incorrectas";
                 return View();
             }
             public IActionResult Logout()

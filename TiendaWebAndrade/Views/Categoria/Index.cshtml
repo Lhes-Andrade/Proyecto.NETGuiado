@@ -1,13 +1,15 @@
 ﻿@model List<TiendaWebAndrade.Models.Categoria>
 
 <h2>Lista de Categorías</h2>
+<a class="btn btn-primary" href="/Categoria/Create">Nueva Categoria</a>
 
-<table class="table">
+<table class="table align-middle">
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Descripción</th>
+            <th>Descripcion</th>
             <th>Estado</th>
+            <th class="text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -16,14 +18,20 @@
             <tr>
                 <td>@item.Nombre</td>
                 <td>@item.Descripcion</td>
-                <td>
-                    @if (item.Estado == "A")
-                    {
-                        <span class="text-success">Activa</span>    
-                    } else
-                    {
-                        <span class="text-danger">Inactivo</span>
-                    }
+                        <td>
+                            @if (item.Estado == "A")
+                            {
+                                <span class="badge bg-success">Activa</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Inactiva</span>
+                            }
+                        </td>
+                <td class="text-center">
+                    <a class="btn btn-warning" href="/Categoria/Edit/@item.Id">Editar</a>
+                    <a class="btn btn-danger" href="/Categoria/Delete/@item.Id"
+                       onclick="return confirm('¿Seguro que deseas eliminar a @item.Nombre?');">Eliminar</a>
                 </td>
             </tr>
         }
