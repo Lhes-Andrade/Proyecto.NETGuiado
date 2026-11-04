@@ -27,7 +27,10 @@
                 <td>@item.Categoria?.Nombre</td>
                 <td>
                     <a class="btn btn-warning" href="/Producto/Edit/@item.Id">Editar</a>
+                    @if(Context.Session.GetString("Rol") == "Administrador")
+                    {
                     <a class="btn btn-danger" href="/Producto/Delete/@item.Id">Eliminar</a>
+                    }
                 </td>
 
             </tr>

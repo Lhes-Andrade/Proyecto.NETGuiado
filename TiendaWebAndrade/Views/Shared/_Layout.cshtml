@@ -28,6 +28,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <!-- SOLO CUANDO LA SESIÓN ESTÁ INICIADA APARECE EL BOTÓN DE CERRAR SESIÓN -->
+                    @if (Context.Session.GetString("Usuario") != null)
+                    {
+                        <a class="btn btn-danger ms-auto text-white" href="/Login/Logout">Cerrar Sesión</a>
+                    }
                 </div>
             </div>
         </nav>

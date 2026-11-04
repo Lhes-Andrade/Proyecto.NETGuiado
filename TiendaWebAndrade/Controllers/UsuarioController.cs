@@ -16,12 +16,11 @@ namespace TiendaWebAndrade.Controllers
         // LISTAR/TRAER LOS USUARIOS QUE TENGO EN LA BD (READ)
         public IActionResult Index()
         {
-            var usuarios = _context.Usuarios.ToList();
             if (HttpContext.Session.GetString("Usuario") == null)
             {
                 return RedirectToAction("Index", "Login");
             }
-
+            var usuarios = _context.Usuarios.ToList();
             return View(usuarios);
             // SELECT * FROM Usuarios
         }
@@ -56,23 +55,26 @@ namespace TiendaWebAndrade.Controllers
         // MOSTRAR EL FORMULARIO PARA EDITAR UN USUARIO ESPECIFICO
         public IActionResult Edit(int id)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var usuario = _context.Usuarios.Find(id);
             if (usuario == null)
             {
                 return NotFound();
             }
             return View(usuario);
-
-            if (HttpContext.Session.GetString("Usuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
         }
 
         // ACTUALIZAR EL USUARIO EN LA BD
         [HttpPost]
         public IActionResult Edit(Usuario usuario)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (ModelState.IsValid)
             {
                 _context.Usuarios.Update(usuario);
@@ -80,15 +82,15 @@ namespace TiendaWebAndrade.Controllers
                 return RedirectToAction("Index");
             }
             return View(usuario);
-            if (HttpContext.Session.GetString("Usuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
         }
 
         // ELIMINAR UN USUARIO EN LA BD
         public IActionResult Delete(int id)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var usuario = _context.Usuarios.Find(id);
             if (usuario == null)
             {
@@ -97,11 +99,6 @@ namespace TiendaWebAndrade.Controllers
             _context.Usuarios.Remove(usuario);
             _context.SaveChanges();
             return RedirectToAction("Index");
-            if (HttpContext.Session.GetString("Usuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
         }
     }
-
 }

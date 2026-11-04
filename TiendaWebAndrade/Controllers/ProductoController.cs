@@ -47,6 +47,10 @@ namespace TiendaWebAndrade.Controllers
         [HttpPost]
         public IActionResult Create(Producto producto)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (ModelState.IsValid)
             {
                 _context.Productos.Add(producto);
@@ -72,6 +76,10 @@ namespace TiendaWebAndrade.Controllers
         [HttpPost]
         public IActionResult Edit(Producto producto)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (ModelState.IsValid)
             {
                 _context.Productos.Update(producto);
@@ -89,6 +97,13 @@ namespace TiendaWebAndrade.Controllers
             if (HttpContext.Session.GetString("Usuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+
+            var rol = HttpContext.Session.GetString("Rol");
+            //SOLO EL ADMIN PUEDE ELIMINAR PRODUCTOS
+            if (rol != "Administrador")
+            {
+                return RedirectToAction("Index");
             }
             var producto = _context.Productos.Find(id);
             _context.Productos.Remove(producto);
