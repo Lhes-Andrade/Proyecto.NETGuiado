@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TiendaWebAndrade.Data;
 using TiendaWebAndrade.Models;
+using TiendaWebAndrade.Helpers;
 
 namespace TiendaWebAndrade.Controllers
 {
@@ -45,6 +46,9 @@ namespace TiendaWebAndrade.Controllers
             }
             if (ModelState.IsValid)
             {
+                // Encriptar la contraseña antes de guardarla en la base de datos
+                usuario.Clave = HashHelper.ObtenerHash(usuario.Clave);
+
                 _context.Usuarios.Add(usuario);
                 _context.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TiendaWebAndrade.Data;
+using TiendaWebAndrade.Helpers;
 
 namespace TiendaWebAndrade.Controllers
 {
@@ -18,8 +19,10 @@ namespace TiendaWebAndrade.Controllers
             [HttpPost]
             public IActionResult Index(string correo, string clave)
             {
+                //Para volver a utilizar el rol como contraseña se debe poner en u.Rol == clave
+                string claveHash = HashHelper.ObtenerHash(clave);
                 var usuario = _context.Usuarios
-                    .FirstOrDefault(u => u.Correo == correo && u.Rol == clave);
+                    .FirstOrDefault(u => u.Correo == correo && u.Clave == claveHash);
                 if (usuario != null)
             {
                 // En la variable Session no guardamos lo que recibimos en Index por parámetro (Correo, Clave).

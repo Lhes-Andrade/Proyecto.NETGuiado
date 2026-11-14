@@ -28,6 +28,15 @@
         <input asp-for="Celular" class="form-control" />
         <span asp-validation-for="Celular" class="text-danger"></span>
     </div>
+    <div class="mb-3">
+        <label>Clave</label>
+
+        <!-- #ERROR NO SE SABE PQ SE UTILIZARON 3 INPUT, y no permite acceder con la contraseña ingresada -->
+        <!-- <input asp-for="Clave" class="form-control" type="password"/> -->
+        <!-- <input asp-for="Clave" type="password" class="form-control"/> -->
+
+        <input asp-validation-for="Clave" class="text-danger"/>
+    </div>
     <hr />
     <button class="btn btn-success">Guardar</button>
     <a class="btn btn-secondary" href="/Usuario">Cancelar</a>

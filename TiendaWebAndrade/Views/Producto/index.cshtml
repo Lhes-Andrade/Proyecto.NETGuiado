@@ -11,7 +11,10 @@
             <th scope="col">Precio</th>
             <th scope="col">Stock</th>
             <th scope="col">Categoria</th>
+            @if(Context.Session.GetString("Rol") == "Administrador")
+            {
             <th scope="col" class="text-center text-nowrap">Acciones</th>
+            }
         </tr>
     </thead>
 
@@ -25,14 +28,13 @@
                 <td>@item.Precio</td>
                 <td>@item.Stock</td>
                 <td>@item.Categoria?.Nombre</td>
-                <td>
+                @if(Context.Session.GetString("Rol") == "Administrador")
+                {
+                    <td>
                     <a class="btn btn-warning" href="/Producto/Edit/@item.Id">Editar</a>
-                    @if(Context.Session.GetString("Rol") == "Administrador")
-                    {
                     <a class="btn btn-danger" href="/Producto/Delete/@item.Id">Eliminar</a>
-                    }
                 </td>
-
+                }
             </tr>
         }
     </tbdoy>

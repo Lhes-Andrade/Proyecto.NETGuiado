@@ -12,5 +12,8 @@ namespace TiendaWebAndrade.Models
 
         [RegularExpression(@"^3\d{9}$", ErrorMessage = "El celular debe tener 10 dígitos y empezar por 3")]
         public string Celular { get; set; }
+
+        [Required(ErrorMessage = "La clave es obligatoria")]
+        public string Clave { get; set; }
     }
 }
